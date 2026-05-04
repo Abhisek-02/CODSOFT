@@ -6,30 +6,30 @@ root = tk.Tk()
 root.title("To-Do List")
 
 # Enter task (text box)
-task_entry = tk.Entry(root, width=40)
-task_entry.pack(pady=10)
+entry_task = tk.Entry(root, width=60)
+entry_task.pack(pady=15)
 
 # Display tasks
-tasks_listbox = tk.Listbox(root, width=50, height=10)
-tasks_listbox.pack(pady=10)
+listbox = tk.Listbox(root, width=60, height=15)
+listbox.pack(pady=15)
 
 # Functions
 def add_task():
-    task = task_entry.get()
+    task = entry_task.get()
     if task:
-        tasks_listbox.insert(tk.END, task)
-        task_entry.delete(0, tk.END)
+        listbox.insert(tk.END, task)
+        entry_task.delete(0, tk.END)
     else:
         messagebox.showwarning("Warning", "Please enter a task!")
 
 def update_task():
     try:
-        selected_index = tasks_listbox.curselection()[0]
-        new_task = task_entry.get()
+        selected_index = listbox.curselection()[0]
+        new_task = entry_task.get()
         if new_task:
-            tasks_listbox.delete(selected_index)
-            tasks_listbox.insert(selected_index, new_task)
-            task_entry.delete(0, tk.END)
+            listbox.delete(selected_index)
+            listbox.insert(selected_index, new_task)
+            entry_task.delete(0, tk.END)
         else:
             messagebox.showwarning("Warning", "Please enter a new task!")
     except IndexError:
@@ -37,8 +37,8 @@ def update_task():
 
 def delete_task():
     try:
-        selected_index = tasks_listbox.curselection()[0]
-        tasks_listbox.delete(selected_index)
+        selected_index = listbox.curselection()[0]
+        listbox.delete(selected_index)
     except IndexError:
         messagebox.showwarning("Warning", "Please select a task to delete!")
 
